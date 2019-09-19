@@ -12,7 +12,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
+        view.backgroundColor = UIColor.gray
+        view.isHidden = true
+        self.view.addSubview(view)
+
+        let testView = self.view.snapshotView(afterScreenUpdates: true)
+        
+        let mainQueue = OperationQueue.main
+        NotificationCenter.default.addObserver(forName: UIApplication.userDidTakeScreenshotNotification, object: nil, queue: mainQueue) { notification in
+        
+            print(notification)
+            print(notification.object)
+        }
     }
 
 
